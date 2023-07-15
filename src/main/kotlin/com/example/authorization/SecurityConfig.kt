@@ -30,6 +30,8 @@ import org.springframework.security.oauth2.server.authorization.config.annotatio
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings
+import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext
+import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer
 import org.springframework.security.provisioning.InMemoryUserDetailsManager
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint
@@ -127,4 +129,9 @@ class SecurityConfig {
 
     @Bean
     fun authorizationServerSettings(): AuthorizationServerSettings = AuthorizationServerSettings.builder().build()
+
+    @Bean
+    fun oAuth2TokenCustomizer(): OAuth2TokenCustomizer<JwtEncodingContext> = OAuth2TokenCustomizer { context ->
+        context.claims.claim("NewCustomClaim", "NewCustomValue")
+    }
 }
