@@ -1,1 +1,1 @@
-rootProject.name = "spring-authorization-server"
+rootProject.name = "spring-authorization-server-demo"
